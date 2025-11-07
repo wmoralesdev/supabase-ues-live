@@ -312,53 +312,55 @@ export function EventDetail() {
               </div>
 
               {/* Messages Area */}
-              <ScrollArea className="flex-1 p-4">
-                <div className="space-y-4">
-                  {messages.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center h-full text-center py-12">
-                      <MessageSquare className="size-12 text-muted-foreground mb-4" />
-                      <p className="text-muted-foreground">
-                        No hay mensajes aún. ¡Sé el primero en comentar!
-                      </p>
-                    </div>
-                  ) : (
-                    messages.map((message) => {
-                      const isOwnMessage = message.user_id === currentUserId
-                      const { color, initial } = getInitials(message.user_id)
+              <div className="flex-1 overflow-hidden">
+                <ScrollArea className="h-full">
+                  <div className="p-4 space-y-4">
+                    {messages.length === 0 ? (
+                      <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
+                        <MessageSquare className="size-12 text-muted-foreground mb-4" />
+                        <p className="text-muted-foreground">
+                          No hay mensajes aún. ¡Sé el primero en comentar!
+                        </p>
+                      </div>
+                    ) : (
+                      messages.map((message) => {
+                        const isOwnMessage = message.user_id === currentUserId
+                        const { color, initial } = getInitials(message.user_id)
 
-                      return (
-                        <div
-                          key={message.id}
-                          className={`flex gap-3 ${isOwnMessage ? "flex-row-reverse" : ""}`}
-                        >
-                          <Avatar className="size-8 shrink-0">
-                            <AvatarFallback className={color}>{initial}</AvatarFallback>
-                          </Avatar>
+                        return (
                           <div
-                            className={`flex flex-col max-w-[70%] ${isOwnMessage ? "items-end" : "items-start"}`}
+                            key={message.id}
+                            className={`flex gap-3 ${isOwnMessage ? "flex-row-reverse" : ""}`}
                           >
+                            <Avatar className="size-8 shrink-0">
+                              <AvatarFallback className={color}>{initial}</AvatarFallback>
+                            </Avatar>
                             <div
-                              className={`rounded-lg px-4 py-2 ${
-                                isOwnMessage
-                                  ? "bg-primary text-primary-foreground"
-                                  : "bg-muted"
-                              }`}
+                              className={`flex flex-col max-w-[70%] ${isOwnMessage ? "items-end" : "items-start"}`}
                             >
-                              <p className="text-sm whitespace-pre-wrap break-words">
-                                {message.content}
+                              <div
+                                className={`rounded-lg px-4 py-2 ${
+                                  isOwnMessage
+                                    ? "bg-primary text-primary-foreground"
+                                    : "bg-muted"
+                                }`}
+                              >
+                                <p className="text-sm whitespace-pre-wrap break-words">
+                                  {message.content}
+                                </p>
+                              </div>
+                              <p className="text-xs text-muted-foreground mt-1 px-1">
+                                {formatMessageDate(message.created_at)}
                               </p>
                             </div>
-                            <p className="text-xs text-muted-foreground mt-1 px-1">
-                              {formatMessageDate(message.created_at)}
-                            </p>
                           </div>
-                        </div>
-                      )
-                    })
-                  )}
-                  <div ref={messagesEndRef} />
-                </div>
-              </ScrollArea>
+                        )
+                      })
+                    )}
+                    <div ref={messagesEndRef} />
+                  </div>
+                </ScrollArea>
+              </div>
 
               {/* Message Input */}
               <div className="border-t p-4">
