@@ -27,7 +27,7 @@ export function EventDetail() {
   const [sending, setSending] = useState(false)
   const [messageText, setMessageText] = useState("")
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
-  const [userEmail, setUserEmail] = useState<string | null>(null)
+  const [, setUserEmail] = useState<string | null>(null)
   const [onlineUsersCount, setOnlineUsersCount] = useState(0)
 
   useEffect(() => {

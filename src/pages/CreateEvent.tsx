@@ -45,7 +45,7 @@ export function CreateEvent() {
       // Convert datetime-local to ISO 8601 format
       const dateValue = new Date(values.date).toISOString()
       
-      const { data, error } = await createEvent({
+      const { error } = await createEvent({
         title: values.title,
         description: values.description || null,
         date: dateValue,

@@ -3,7 +3,7 @@
  */
 
 import { supabase } from "./supabase";
-import type { Event, CreateEventInput, UpdateEventInput } from "../types/database";
+import type { CreateEventInput, UpdateEventInput } from "../types/database";
 
 /**
  * Fetch all events, ordered by date (ascending)
